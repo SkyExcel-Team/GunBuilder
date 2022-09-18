@@ -1,4 +1,3 @@
-
 plugins {
     id 'java'
     id 'kr.entree.spigradle' version '2.2.4'
@@ -10,30 +9,17 @@ apply plugin: 'groovy'
 
 repositories {
     maven { url 'https://jitpack.io' }
-    maven { url "https://mvn.lumine.io/repository/maven-public/" }
-    maven { url "https://mvn.lumine.io/repository/maven-public/" }
-    maven {url = 'https://repo.codemc.org/repository/maven-public/'}
-
-    maven {url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'}
-
-    maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
-    maven { url = 'https://oss.sonatype.org/content/repositories/central' }
-    maven { url 'https://jitpack.io' }
-
-
+    maven { url = uri("https://hub.spigotmc.org/nexus/content/repositories/snapshots/") }
+    maven { url = uri("https://maven.enginehub.org/repo/") }
+    maven { url = uri("https://repo.dmulloy2.net/repository/public/") }
 }
 dependencies {
-    compileOnly 'de.tr7zw:item-nbt-api-plugin:2.10.0'
-
-    compileOnly("org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT") // The Spigot API with no shadowing. Requires the OSS repo.
-    compileOnly("org.spigotmc:spigot:1.12.2-R0.1-SNAPSHOT")
+    compileOnly 'org.spigotmc:spigot-api:1.19.2-R0.1-SNAPSHOT' // Bukkit
+    compileOnly 'org.spigotmc:spigot:1.19.2-R0.1-SNAPSHOT' // Bukkit
 
     compileOnly fileTree(dir: 'api', include: ['*.jar'])
 }
 
-group 'org.example'
-version '1.0-SNAPSHOT'
-
 jar {
-    destinationDirectory.set(file('D:\\Project\\minecraft\\Commission\\플러그인테스트\\1.18.2\\plugins'))
+    destinationDirectory.set(file('D:\\Project\\minecraft\\Commission\\플러그인테스트\\1.19.2\\plugins'))
 }

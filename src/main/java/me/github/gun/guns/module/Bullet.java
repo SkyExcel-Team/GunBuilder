@@ -7,9 +7,13 @@ public abstract class Bullet {
 
     private int bullet;
 
+    private double speed;
+    
+
     protected Bullet(String name) {
         this.name = name;
     }
+
     public int setMaxBullet(int maxBullet) {
         this.maxBullet = maxBullet;
         return maxBullet;
@@ -23,7 +27,6 @@ public abstract class Bullet {
     }
 
     public void setBullet(int bullet) {
-
         this.bullet = bullet;
     }
 
