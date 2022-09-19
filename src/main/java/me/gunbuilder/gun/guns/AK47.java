@@ -23,7 +23,7 @@ public class AK47 extends Gun {
 
         storage.setGun(this);
         storage.getGun().getStorage().setAmmo(0);
-        storage.getGun().getStorage().setMaxAmmo(50);
+
         System.out.println("대용량 탄창 용량 : " + storage.getAmmo() + "/" +  storage.getMaxAmmo());
 
     }

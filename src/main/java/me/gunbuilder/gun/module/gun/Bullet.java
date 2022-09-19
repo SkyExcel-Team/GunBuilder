@@ -1,6 +1,7 @@
 package me.gunbuilder.gun.module.gun;
 
-public abstract class Bullet {
+public abstract class
+Bullet {
     private String name;
 
     private double speed = 50;

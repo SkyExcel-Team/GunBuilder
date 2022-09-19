@@ -1,7 +1,6 @@
 package me.gunbuilder.gun.module.gun;
 
 import me.gunbuilder.gun.module.event.GunReloadEvent;
-
 import me.gunbuilder.gun.storage.Storage;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
@@ -46,7 +45,6 @@ public abstract class Gun extends Bullet {
      * @param gun    GunName
      * @param bullet BulletName
      * @param item   GunItem
-     * @param sound  LaunchSound
      */
     protected Gun(String gun, String bullet, ItemStack item, Sound run_sound, Sound reload_sound) {
         super(bullet);
@@ -109,4 +107,9 @@ public abstract class Gun extends Bullet {
     public double getReload_speed() {
         return reload_speed;
     }
+
+    public void register(){
+        System.out.println(getName() + " Config Node 추가!");
+    }
+
 }
