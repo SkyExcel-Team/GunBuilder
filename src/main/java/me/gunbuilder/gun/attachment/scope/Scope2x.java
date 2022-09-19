@@ -1,7 +1,7 @@
-package me.github.gun.attachment.scope;
+package me.gunbuilder.gun.attachment.scope;
 
-import me.github.gun.guns.K2;
-import me.github.gun.module.attachment.Attachment;
+import me.gunbuilder.gun.guns.K2;
+import me.gunbuilder.gun.module.attachment.Attachment;
 
 import java.util.Arrays;
 

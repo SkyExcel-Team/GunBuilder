@@ -1,12 +1,13 @@
-package me.github.gun.module.event;
+package me.gunbuilder.gun.module.event;
 
-import me.github.gun.module.gun.Gun;
+import me.gunbuilder.gun.module.gun.Gun;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
+import org.jetbrains.annotations.NotNull;
 
-public class ReloadEvent extends Event implements Cancellable {
+public class GunPickUpEvent extends Event implements Cancellable {
 
     private Gun gun;
     private Player player;
@@ -14,7 +15,13 @@ public class ReloadEvent extends Event implements Cancellable {
     private boolean isCancelled;
 
 
-    public ReloadEvent(Gun gun, Player player) {
+    /**
+     * Call When the player reload the gun
+     *
+     * @param gun    What's reloaded
+     * @param player Who's reload
+     */
+    public GunPickUpEvent(Gun gun, Player player) {
         this.gun = gun;
         this.player = player;
     }

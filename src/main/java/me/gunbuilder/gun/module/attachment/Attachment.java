@@ -1,6 +1,7 @@
-package me.github.gun.module.attachment;
+package me.gunbuilder.gun.module.attachment;
 
-import me.github.gun.module.gun.Gun;
+import me.gunbuilder.gun.module.gun.Gun;
+
 import java.util.List;
 
 public abstract class Attachment implements AttachmentOption {
@@ -21,8 +22,8 @@ public abstract class Attachment implements AttachmentOption {
 
         this.gun = gun;
 
-        guns.stream().forEach(gun1 -> {
-            if(gun1.getName().equalsIgnoreCase(gun.getName())){
+        guns.stream().forEach(guns -> {
+            if(guns.getName().equalsIgnoreCase(gun.getName())){
                 option();
             }
         });
@@ -39,4 +40,5 @@ public abstract class Attachment implements AttachmentOption {
     public List<Gun> getGuns() {
         return guns;
     }
+
 }

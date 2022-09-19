@@ -1,7 +1,10 @@
-package me.github.gun.module.gun;
+package me.gunbuilder.gun.module.gun;
 
-import me.github.gun.module.event.ReloadEvent;
+import me.gunbuilder.gun.module.event.GunReloadEvent;
+
+import me.gunbuilder.gun.storage.Storage;
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -19,46 +22,46 @@ public abstract class Gun extends Bullet {
 
     private double damage;
 
-    private int Storage;
+    private Storage storage;
 
     private double reload_speed;
 
-    private int MaxAmmunition;
+    private Sound run_sound;
+
+
+    private Sound reload_sound;
+
+
+    /**
+     * This Collection's size by the storage
+     */
+
     private Collection<Bullet> bullets;
 
 
     /**
-     * Register new Gun in the class's constructor.
+     * Register new gun in your own class constructor.
+     * You can register multiple variables of the gun's parameter
      *
-     * @param gun The name of the gun
+     * @param gun    GunName
+     * @param bullet BulletName
+     * @param item   GunItem
+     * @param sound  LaunchSound
      */
-    protected Gun(String gun, String bullet, int MaxAmmunition) {
-        super(bullet);
-        this.MaxAmmunition = MaxAmmunition;
-        this.bullet = this;
-        this.name = gun;
-    }
-
-    /**
-     * Register new Gun in the class's constructor.
-     *
-     * @param gun  The name of the gun
-     * @param item The item of the gun
-     */
-    protected Gun(String gun, String bullet, ItemStack item) {
+    protected Gun(String gun, String bullet, ItemStack item, Sound run_sound, Sound reload_sound) {
         super(bullet);
         this.bullet = this;
         this.name = gun;
         this.item = item;
+        this.run_sound = run_sound;
+        this.reload_sound = reload_sound;
     }
 
 
     protected void reloadGun(Player player) {
-        ReloadEvent event = new ReloadEvent(this, player);
+        GunReloadEvent event = new GunReloadEvent(this, player);
         Bukkit.getPluginManager().callEvent(event);
-        for (int i = Storage; i < MaxAmmunition; i++) {
-            bullets.add(bullet);
-        }
+
     }
 
     protected void launchGun() {
@@ -80,9 +83,7 @@ public abstract class Gun extends Bullet {
         return name;
     }
 
-    public int getStorage() {
-        return Storage;
-    }
+
 
     public void setType(String type) {
         this.type = type;
@@ -92,8 +93,13 @@ public abstract class Gun extends Bullet {
         return type;
     }
 
-    public int getMaxAmmunition() {
-        return MaxAmmunition;
+
+    public void setStorage(Storage storage) {
+        this.storage = storage;
+    }
+
+    public Storage getStorage() {
+        return storage;
     }
 
     public void setReload_speed(double reload_speed) {

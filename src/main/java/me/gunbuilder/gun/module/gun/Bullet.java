@@ -1,4 +1,4 @@
-package me.github.gun.module.gun;
+package me.gunbuilder.gun.module.gun;
 
 public abstract class Bullet {
     private String name;
