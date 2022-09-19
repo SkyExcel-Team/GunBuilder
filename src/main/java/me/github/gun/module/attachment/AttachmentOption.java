@@ -1,4 +1,4 @@
-package me.github.gun.guns.module.attachment;
+package me.github.gun.module.attachment;
 
 public interface AttachmentOption {
 

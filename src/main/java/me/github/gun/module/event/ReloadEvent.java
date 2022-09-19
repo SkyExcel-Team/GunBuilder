@@ -1,6 +1,6 @@
-package me.github.gun.guns.event;
+package me.github.gun.module.event;
 
-import me.github.gun.guns.module.Gun;
+import me.github.gun.module.gun.Gun;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
