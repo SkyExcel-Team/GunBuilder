@@ -46,6 +46,7 @@ public abstract class Gun extends Bullet {
     /**
      * This constructor not require the bullet information
      * You can use this constructor but the bullet might return null
+     * unless set bullet
      *
      * @param gun  GunName
      * @param item GunItem
@@ -102,8 +103,23 @@ public abstract class Gun extends Bullet {
     }
 
 
+    /**
+     * This method should be use when using constructor not require bullet
+     * Or, change the bullet information
+     *
+     * @param bullet newBullet
+     */
+    public void setBullet(Bullet bullet) {
+        this.bullet = bullet;
+    }
+
     public Bullet getBullet() {
-        return bullet;
+        return (bullet != null ? bullet : new Bullet("null") {
+            @Override
+            public String getName() {
+                return super.getName();
+            }
+        });
     }
 
     public ItemStack getItem() {

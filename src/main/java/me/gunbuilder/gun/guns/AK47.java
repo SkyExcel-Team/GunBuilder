@@ -16,6 +16,7 @@ public class AK47 extends Gun {
     @Override
     public void addAttachment(Attachment attachment) {
         System.out.println(attachment.getName());
+        setBullet(null);
         super.addAttachment(attachment);
     }
 
