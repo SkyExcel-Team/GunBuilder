@@ -24,6 +24,7 @@ public abstract class Attachment implements AttachmentOption {
 
         guns.stream().forEach(guns -> {
             if(guns.getName().equalsIgnoreCase(gun.getName())){
+                System.out.println(gun.getName());
                 option();
             }
         });

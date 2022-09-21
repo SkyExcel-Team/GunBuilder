@@ -1,7 +1,6 @@
 package me.gunbuilder.gun.module.gun;
 
-public abstract class
-Bullet {
+public abstract class Bullet {
     private String name;
 
     private double speed = 50;
@@ -11,7 +10,7 @@ Bullet {
         this.name = name;
     }
 
-    public String getBulletName() {
+    public String getName() {
         return name;
     }
 

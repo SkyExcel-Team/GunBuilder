@@ -1,6 +1,8 @@
 package me.gunbuilder.gun.module.gun;
 
-import me.gunbuilder.gun.module.event.GunReloadEvent;
+import me.gunbuilder.gun.module.attachment.Attachment;
+import me.gunbuilder.gun.module.event.GunEvent;
+import me.gunbuilder.gun.module.event.action.GunAction;
 import me.gunbuilder.gun.storage.Storage;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
@@ -38,6 +40,25 @@ public abstract class Gun extends Bullet {
     private Collection<Bullet> bullets;
 
 
+    private Collection<Attachment> attachments;
+
+
+    /**
+     * This constructor not require the bullet information
+     * You can use this constructor but the bullet might return null
+     *
+     * @param gun  GunName
+     * @param item GunItem
+     */
+    protected Gun(String gun, ItemStack item, Sound run_sound, Sound reload_sound) {
+        super(null);
+        this.name = gun;
+        this.item = item;
+        this.run_sound = run_sound;
+        this.reload_sound = reload_sound;
+    }
+
+
     /**
      * Register new gun in your own class constructor.
      * You can register multiple variables of the gun's parameter
@@ -57,7 +78,9 @@ public abstract class Gun extends Bullet {
 
 
     protected void reloadGun(Player player) {
-        GunReloadEvent event = new GunReloadEvent(this, player);
+        GunEvent event = new GunEvent(this, player);
+        event.setAction(GunAction.RELOAD);
+
         Bukkit.getPluginManager().callEvent(event);
 
     }
@@ -66,6 +89,16 @@ public abstract class Gun extends Bullet {
         if (bullets.size() != 0) {
             bullets.remove(bullet);
         }
+    }
+
+    public void addAttachment(Attachment attachment) {
+        attachment.setGun(this);
+        attachments.add(attachment);
+    }
+
+    public void removePart(Attachment attachment) {
+        attachment.setGun(this);
+        attachments.remove(attachment);
     }
 
 
@@ -77,12 +110,6 @@ public abstract class Gun extends Bullet {
         return item;
     }
 
-    public String getName() {
-        return name;
-    }
-
-
-
     public void setType(String type) {
         this.type = type;
     }
@@ -91,6 +118,13 @@ public abstract class Gun extends Bullet {
         return type;
     }
 
+    public void setDamage(double damage) {
+        this.damage = damage;
+    }
+
+    public double getDamage() {
+        return damage;
+    }
 
     public void setStorage(Storage storage) {
         this.storage = storage;
@@ -108,8 +142,15 @@ public abstract class Gun extends Bullet {
         return reload_speed;
     }
 
-    public void register(){
-        System.out.println(getName() + " Config Node 추가!");
+    public Sound getReload_sound() {
+        return reload_sound;
     }
 
+    public Sound getRun_sound() {
+        return run_sound;
+    }
+
+    public void register() {
+        System.out.println(getName() + " Config Node 추가!");
+    }
 }
