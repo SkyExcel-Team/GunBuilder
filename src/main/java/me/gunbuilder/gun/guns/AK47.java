@@ -8,9 +8,13 @@ import org.bukkit.inventory.ItemStack;
 
 public class AK47 extends Gun {
 
-    public AK47() {
-        super("AK47", "7.62mm", new ItemStack(Material.GRASS_BLOCK), Sound.AMBIENT_BASALT_DELTAS_ADDITIONS, Sound.BLOCK_CHEST_OPEN);
+    private String type = "";
 
+    public AK47() {
+        super("AK47", "7.62mm",
+                new ItemStack(Material.GRASS_BLOCK),
+                Sound.AMBIENT_BASALT_DELTAS_ADDITIONS,
+                Sound.BLOCK_CHEST_OPEN);
     }
 
     @Override
@@ -27,7 +31,16 @@ public class AK47 extends Gun {
     }
 
     @Override
-    protected void launchGun() {
+    public void launchGun() {
         super.launchGun();
+    }
+
+    @Override
+    public void setType() {
+        type = "fire";
+    }
+
+    public String getType() {
+        return type;
     }
 }

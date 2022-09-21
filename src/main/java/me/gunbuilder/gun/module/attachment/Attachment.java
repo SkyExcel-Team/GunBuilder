@@ -12,7 +12,6 @@ public abstract class Attachment implements AttachmentOption {
     private Gun gun;
 
     protected Attachment(String name, List<Gun> guns) {
-
         this.name = name;
         this.guns = guns;
     }

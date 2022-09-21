@@ -3,19 +3,22 @@ package me.gunbuilder.gun.module.gun;
 import me.gunbuilder.gun.module.attachment.Attachment;
 import me.gunbuilder.gun.module.event.GunEvent;
 import me.gunbuilder.gun.module.event.action.GunAction;
+import me.gunbuilder.gun.module.type.GunType;
 import me.gunbuilder.gun.storage.Storage;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Collection;
 
-public abstract class Gun extends Bullet {
+/**
+ *
+ */
+public abstract class Gun extends Bullet implements GunType {
 
     private String name;
-
-    private String type;
 
     private ItemStack item;
 
@@ -44,7 +47,7 @@ public abstract class Gun extends Bullet {
 
 
     /**
-     * This constructor not require the bullet information
+     * This constructor doesn't require the bullet information
      * You can use this constructor but the bullet might return null
      * unless set bullet
      *
@@ -52,7 +55,7 @@ public abstract class Gun extends Bullet {
      * @param item GunItem
      */
     protected Gun(String gun, ItemStack item, Sound run_sound, Sound reload_sound) {
-        super(null);
+        super("null");
         this.name = gun;
         this.item = item;
         this.run_sound = run_sound;
@@ -78,7 +81,11 @@ public abstract class Gun extends Bullet {
     }
 
 
-    protected void reloadGun(Player player) {
+    /**
+     *
+     * @param player Get the player
+     */
+    public void reloadGun(Player player) {
         GunEvent event = new GunEvent(this, player);
         event.setAction(GunAction.RELOAD);
 
@@ -86,7 +93,7 @@ public abstract class Gun extends Bullet {
 
     }
 
-    protected void launchGun() {
+    public void launchGun() {
         if (bullets.size() != 0) {
             bullets.remove(bullet);
         }
@@ -97,6 +104,12 @@ public abstract class Gun extends Bullet {
         attachments.add(attachment);
     }
 
+    /**
+     * This method remove automatically check bullet or gun is null
+     * So You can do whatever in this method with sort of this class
+     *
+     * @param attachment remove part object class
+     */
     public void removePart(Attachment attachment) {
         attachment.setGun(this);
         attachments.remove(attachment);
@@ -113,10 +126,16 @@ public abstract class Gun extends Bullet {
         this.bullet = bullet;
     }
 
+
+    /**
+     * If the bullet class is null, the bullet might return the class name by "null"
+     * @return Bullet class even there's empty on bullet but the error message going to print
+     */
     public Bullet getBullet() {
         return (bullet != null ? bullet : new Bullet("null") {
             @Override
             public String getName() {
+                Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "The Bullet class might be null! ");
                 return super.getName();
             }
         });
@@ -126,13 +145,6 @@ public abstract class Gun extends Bullet {
         return item;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getType() {
-        return type;
-    }
 
     public void setDamage(double damage) {
         this.damage = damage;
@@ -169,4 +181,5 @@ public abstract class Gun extends Bullet {
     public void register() {
         System.out.println(getName() + " Config Node 추가!");
     }
+
 }

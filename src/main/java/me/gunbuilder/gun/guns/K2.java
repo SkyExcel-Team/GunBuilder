@@ -8,9 +8,12 @@ import org.bukkit.Sound;
 import org.bukkit.inventory.ItemStack;
 
 public class K2 extends Gun {
+    String type = "";
     public K2() {
         super("K2", "5.56mm",
-                new ItemStack(Material.GRASS_BLOCK), Sound.AMBIENT_BASALT_DELTAS_ADDITIONS, Sound.BLOCK_CHEST_OPEN);
+                new ItemStack(Material.GRASS_BLOCK),
+                Sound.AMBIENT_BASALT_DELTAS_ADDITIONS,
+                Sound.BLOCK_CHEST_OPEN);
     }
 
     public void addChoke() {
@@ -19,5 +22,14 @@ public class K2 extends Gun {
 
         Scope2x scope2x = new Scope2x();
         scope2x.setGun(this);
+    }
+
+    @Override
+    public void setType() {
+        type = "fire";
+    }
+
+    public String getType() {
+        return type;
     }
 }
