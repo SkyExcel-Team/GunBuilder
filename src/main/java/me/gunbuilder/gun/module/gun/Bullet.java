@@ -7,6 +7,7 @@ public abstract class Bullet {
 
 
     protected Bullet(String name) {
+
         this.name = name;
     }
 

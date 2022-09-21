@@ -8,16 +8,18 @@ import me.gunbuilder.gun.storage.Storage;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin implements Listener {
 
+    public static Plugin plugin;
 
     @Override
     public void onEnable() {
         super.onEnable();
-
+        plugin = this;
         AK47 ak47 = new AK47();
 
         ak47.addAttachment(new Angle());
