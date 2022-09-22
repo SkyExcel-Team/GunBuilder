@@ -8,7 +8,7 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 /**
- * Include the attachment for consider what's gun and part of it
+ * Include the attachment class for consider what's gun and part of it
  * This event can seperate gun's action
  * if the gun is null action might return null too.
  */

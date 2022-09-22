@@ -14,7 +14,29 @@ import org.bukkit.inventory.ItemStack;
 import java.util.Collection;
 
 /**
+ * <pre>{@code
  *
+ * public class AK47 extends Gun {
+ *
+ * private String type = "";
+ *
+ * public AK47() {
+ * super("AK47", "7.62mm",
+ * new ItemStack(Material.GRASS_BLOCK),
+ *      Sound.BLOCK_CHEST_OPEN, //Gun Launch Sound
+ *      Sound.BLOCK_CHEST_OPEN); //Gun Reload Sound
+ *      }
+ *
+ * @Override
+ * public void setType() {
+ * type = "fire";
+ *      }
+ *
+ * public String getType() {
+ * return type;
+ *     }
+ * }
+ * }</pre>
  */
 public abstract class Gun extends Bullet implements GunType {
 
@@ -49,7 +71,6 @@ public abstract class Gun extends Bullet implements GunType {
     /**
      * This constructor doesn't require the bullet information
      * You can use this constructor but the bullet might return null
-     * unless set bullet
      *
      * @param gun  GunName
      * @param item GunItem
@@ -82,26 +103,32 @@ public abstract class Gun extends Bullet implements GunType {
 
 
     /**
+     * This method must be use when it's reload
+     * You can call this method in event, or class
      *
      * @param player Get the player
      */
     public void reloadGun(Player player) {
-        GunEvent event = new GunEvent(this, player);
-        event.setAction(GunAction.RELOAD);
-
-        Bukkit.getPluginManager().callEvent(event);
+        registerGunEvent(GunAction.RELOAD, player);
 
     }
 
-    public void launchGun() {
+    public void launchGun(Player player) {
         if (bullets.size() != 0) {
-            bullets.remove(bullet);
+
+            registerGunEvent(GunAction.RELOAD, player);
         }
     }
 
+    /**
+     * Add attachment and register attachment event with type(set to add)
+     *
+     * @param attachment Added object class
+     */
     public void addAttachment(Attachment attachment) {
         attachment.setGun(this);
         attachments.add(attachment);
+
     }
 
     /**
@@ -110,9 +137,9 @@ public abstract class Gun extends Bullet implements GunType {
      *
      * @param attachment remove part object class
      */
-    public void removePart(Attachment attachment) {
+    public void removeAttachment(Attachment attachment) {
         attachment.setGun(this);
-        attachments.remove(attachment);
+
     }
 
 
@@ -129,6 +156,7 @@ public abstract class Gun extends Bullet implements GunType {
 
     /**
      * If the bullet class is null, the bullet might return the class name by "null"
+     *
      * @return Bullet class even there's empty on bullet but the error message going to print
      */
     public Bullet getBullet() {
@@ -139,6 +167,10 @@ public abstract class Gun extends Bullet implements GunType {
                 return super.getName();
             }
         });
+    }
+
+    public Collection<Attachment> getAttachments() {
+        return attachments;
     }
 
     public ItemStack getItem() {
@@ -182,4 +214,9 @@ public abstract class Gun extends Bullet implements GunType {
         System.out.println(getName() + " Config Node 추가!");
     }
 
+    private void registerGunEvent(GunAction action, Player player) {
+        GunEvent event = new GunEvent(this, player);
+        event.setAction(action);
+        Bukkit.getPluginManager().callEvent(event);
+    }
 }

@@ -4,6 +4,7 @@ import me.gunbuilder.gun.attachment.Angle;
 import me.gunbuilder.gun.guns.AK47;
 import me.gunbuilder.gun.module.event.GunEvent;
 import me.gunbuilder.gun.module.event.action.GunAction;
+import me.gunbuilder.gun.module.gun.Gun;
 import me.gunbuilder.gun.storage.Storage;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
@@ -22,9 +23,10 @@ public class Main extends JavaPlugin implements Listener {
         plugin = this;
         AK47 ak47 = new AK47();
 
-        ak47.addAttachment(new Angle());
+        Angle angle = new Angle();
+        ak47.addAttachment(angle);
 
-        ak47.addAttachment(new Storage());
+        ak47.removeAttachment(angle);
 
         PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(this, this);
@@ -32,6 +34,8 @@ public class Main extends JavaPlugin implements Listener {
 
     @EventHandler
     public void Gun(GunEvent event) {
+        Gun gun = event.getGun();
+
         if (event.getAction().equals(GunAction.RELOAD)) {
             event.getPlayer().sendMessage(event.getGun().getName() + " 리로드를 했습니다!");
         }

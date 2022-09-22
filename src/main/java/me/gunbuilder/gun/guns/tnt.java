@@ -14,10 +14,6 @@ public class tnt extends Gun {
                 Sound.ENTITY_GENERIC_EXPLODE);
     }
 
-    @Override
-    public void launchGun() {
-        super.launchGun();
-    }
 
     @Override
     public void setType() {

@@ -13,27 +13,23 @@ public class AK47 extends Gun {
     public AK47() {
         super("AK47", "7.62mm",
                 new ItemStack(Material.GRASS_BLOCK),
-                Sound.AMBIENT_BASALT_DELTAS_ADDITIONS,
+                Sound.BLOCK_CHEST_OPEN,
                 Sound.BLOCK_CHEST_OPEN);
     }
 
     @Override
     public void addAttachment(Attachment attachment) {
-        System.out.println(attachment.getName());
+        System.out.println(attachment.getName() + "파츠가 장착 되었습니다!" + getAttachments().size());
         setBullet(null);
         super.addAttachment(attachment);
     }
 
     @Override
-    public void removePart(Attachment attachment) {
-
-        super.removePart(attachment);
+    public void removeAttachment(Attachment attachment) {
+        System.out.printf(attachment.getName() + " 파츠가 제거 되었습니다! " + getAttachments().size());
+        super.removeAttachment(attachment);
     }
 
-    @Override
-    public void launchGun() {
-        super.launchGun();
-    }
 
     @Override
     public void setType() {
