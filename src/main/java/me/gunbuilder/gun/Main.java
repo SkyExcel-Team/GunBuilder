@@ -23,9 +23,9 @@ public class Main extends JavaPlugin implements Listener {
         plugin = this;
         AK47 ak47 = new AK47();
 
+
         Angle angle = new Angle();
         ak47.addAttachment(angle);
-
         ak47.removeAttachment(angle);
 
         PluginManager pm = Bukkit.getPluginManager();

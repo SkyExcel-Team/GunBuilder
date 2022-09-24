@@ -8,10 +8,11 @@ import me.gunbuilder.gun.storage.Storage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
+import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-
-import java.util.Collection;
+import org.jetbrains.annotations.NotNull;
+import java.util.*;
 
 /**
  * <pre>{@code
@@ -38,7 +39,7 @@ import java.util.Collection;
  * }
  * }</pre>
  */
-public abstract class Gun extends Bullet implements GunType {
+public abstract class Gun extends Bullet implements GunType, ConfigurationSerializable {
 
     private String name;
 
@@ -65,7 +66,7 @@ public abstract class Gun extends Bullet implements GunType {
     private Collection<Bullet> bullets;
 
 
-    private Collection<Attachment> attachments;
+    private ArrayList<Attachment> attachments = new ArrayList<>();
 
 
     /**
@@ -99,6 +100,7 @@ public abstract class Gun extends Bullet implements GunType {
         this.item = item;
         this.run_sound = run_sound;
         this.reload_sound = reload_sound;
+        setType();
     }
 
 
@@ -218,5 +220,14 @@ public abstract class Gun extends Bullet implements GunType {
         GunEvent event = new GunEvent(this, player);
         event.setAction(action);
         Bukkit.getPluginManager().callEvent(event);
+    }
+
+    @NotNull
+    @Override
+    public Map<String, Object> serialize() {
+        Map<String, Object> result = new LinkedHashMap<>();
+        result.put("name", getName());
+        result.put("damage", getDamage());
+        return result;
     }
 }
